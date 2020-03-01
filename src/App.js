@@ -22,14 +22,14 @@ const getAirports = async () => {
 };
 
 const searchAirportsByName = async pattern => {
-  const url = new URL(`by-tex?text=${pattern}`, airportsApiPath);
+  const url = new URL(`by-text?text=${pattern}`, airportsApiPath);
   const response = await axios.get(url);
   const findedAirports = response.data;
   return findedAirports;
 };
 
 const searchAirportsByCode = async pattern => {
-  const url = new URL(`by-cod?code=${pattern}`, airportsApiPath);
+  const url = new URL(`by-code?code=${pattern}`, airportsApiPath);
   const response = await axios.get(url);
   const findedAirports = response.data;
   return findedAirports;
@@ -98,9 +98,9 @@ function App() {
             [...findedByCode, ...findedByName],
             'airportId'
           );
-          // feature for reduce requests
           if (allFinded.length > 0) {
             setFilteredAirports(allFinded);
+            // feature for reduce requests
             setAirports([...airports, ...allFinded]);
           }
         } catch (e) {
